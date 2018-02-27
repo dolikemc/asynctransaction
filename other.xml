@@ -1,0 +1,254 @@
+<application>
+  <component name="CPPToolchains" version="2">
+    <toolchains detectedVersion="5">
+      <toolchain name="Default" useCustomCMake="false" debuggerKind="BUNDLED_LLDB" />
+    </toolchains>
+    <debuggers />
+  </component>
+  <component name="CvsApplicationLevelConfiguration">
+    <option name="LOCAL_CONFIGURATION">
+      <value>
+        <option name="PATH_TO_CVS_CLIENT" value="/opt/local/bin/cvs" />
+      </value>
+    </option>
+    <option name="PATH_TO_PASSWORD_FILE" value="$USER_HOME$/.cvspass" />
+    <Configuration>
+      <option name="CVS_ROOT" value="/usr/local/homecvs" />
+      <option name="PATH_TO_WORKING_FOLDER" value="" />
+      <option name="PROXY_SETTINGS">
+        <value>
+          <option name="USE_PROXY" value="false" />
+          <option name="PROXY_HOST" value="" />
+          <option name="PROXY_PORT" value="8080" />
+          <option name="TYPE" value="0" />
+          <option name="LOGIN" value="" />
+          <option name="PASSWORD" value="" />
+        </value>
+      </option>
+      <option name="EXT_CONFIGURATION">
+        <value>
+          <option name="CVS_RSH" value="ssh" />
+          <option name="PRIVATE_KEY_FILE" value="" />
+          <option name="ADDITIONAL_PARAMETERS" value="" />
+          <option name="USE_INTERNAL_SSH_IMPLEMENTATION" value="false" />
+        </value>
+      </option>
+      <option name="SSH_CONFIGURATION">
+        <value SSH_TYPE="SSH1, SSH2">
+          <option name="USE_PPK" value="false" />
+          <option name="PATH_TO_PPK" value="" />
+        </value>
+      </option>
+      <option name="SSH_FOR_EXT_CONFIGURATION">
+        <value SSH_TYPE="SSH1, SSH2">
+          <option name="USE_PPK" value="false" />
+          <option name="PATH_TO_PPK" value="" />
+        </value>
+      </option>
+      <option name="LOCAL_CONFIGURATION">
+        <value>
+          <option name="PATH_TO_CVS_CLIENT" value="/opt/local/bin/cvs" />
+        </value>
+      </option>
+      <option name="DATE_OR_REVISION_SETTINGS">
+        <value>
+          <option name="BRANCH" value="" />
+          <option name="DATE" value="Fri Oct 06 11:35:49 2017" />
+          <option name="USE_BRANCH" value="false" />
+          <option name="USE_DATE" value="false" />
+        </value>
+      </option>
+    </Configuration>
+    <Configuration>
+      <option name="CVS_ROOT" value="/usr/local/homecvs/" />
+      <option name="PATH_TO_WORKING_FOLDER" value="" />
+      <option name="PROXY_SETTINGS">
+        <value>
+          <option name="USE_PROXY" value="false" />
+          <option name="PROXY_HOST" value="" />
+          <option name="PROXY_PORT" value="8080" />
+          <option name="TYPE" value="0" />
+          <option name="LOGIN" value="" />
+          <option name="PASSWORD" value="" />
+        </value>
+      </option>
+      <option name="EXT_CONFIGURATION">
+        <value>
+          <option name="CVS_RSH" value="ssh" />
+          <option name="PRIVATE_KEY_FILE" value="" />
+          <option name="ADDITIONAL_PARAMETERS" value="" />
+          <option name="USE_INTERNAL_SSH_IMPLEMENTATION" value="false" />
+        </value>
+      </option>
+      <option name="SSH_CONFIGURATION">
+        <value SSH_TYPE="SSH1, SSH2">
+          <option name="USE_PPK" value="false" />
+          <option name="PATH_TO_PPK" value="" />
+        </value>
+      </option>
+      <option name="SSH_FOR_EXT_CONFIGURATION">
+        <value SSH_TYPE="SSH1, SSH2">
+          <option name="USE_PPK" value="false" />
+          <option name="PATH_TO_PPK" value="" />
+        </value>
+      </option>
+      <option name="LOCAL_CONFIGURATION">
+        <value>
+          <option name="PATH_TO_CVS_CLIENT" value="/opt/local/bin/cvs" />
+        </value>
+      </option>
+      <option name="DATE_OR_REVISION_SETTINGS">
+        <value>
+          <option name="BRANCH" value="" />
+          <option name="DATE" value="Sat Oct 07 18:22:13 2017" />
+          <option name="USE_BRANCH" value="false" />
+          <option name="USE_DATE" value="false" />
+        </value>
+      </option>
+    </Configuration>
+    <Configuration>
+      <option name="CVS_ROOT" value=":pserver:buchetmanncc@newedi.ebv.com:/opt/cvs/homecvs" />
+      <option name="PATH_TO_WORKING_FOLDER" value="" />
+      <option name="PROXY_SETTINGS">
+        <value>
+          <option name="USE_PROXY" value="false" />
+          <option name="PROXY_HOST" value="" />
+          <option name="PROXY_PORT" value="8080" />
+          <option name="TYPE" value="0" />
+          <option name="LOGIN" value="" />
+          <option name="PASSWORD" value="" />
+        </value>
+      </option>
+      <option name="EXT_CONFIGURATION">
+        <value>
+          <option name="CVS_RSH" value="ssh" />
+          <option name="PRIVATE_KEY_FILE" value="" />
+          <option name="ADDITIONAL_PARAMETERS" value="" />
+          <option name="USE_INTERNAL_SSH_IMPLEMENTATION" value="false" />
+        </value>
+      </option>
+      <option name="SSH_CONFIGURATION">
+        <value SSH_TYPE="SSH1, SSH2">
+          <option name="USE_PPK" value="false" />
+          <option name="PATH_TO_PPK" value="" />
+        </value>
+      </option>
+      <option name="SSH_FOR_EXT_CONFIGURATION">
+        <value SSH_TYPE="SSH1, SSH2">
+          <option name="USE_PPK" value="false" />
+          <option name="PATH_TO_PPK" value="" />
+        </value>
+      </option>
+      <option name="LOCAL_CONFIGURATION">
+        <value>
+          <option name="PATH_TO_CVS_CLIENT" value="/opt/local/bin/cvs" />
+        </value>
+      </option>
+      <option name="DATE_OR_REVISION_SETTINGS">
+        <value>
+          <option name="BRANCH" value="" />
+          <option name="DATE" value="" />
+          <option name="USE_BRANCH" value="false" />
+          <option name="USE_DATE" value="false" />
+        </value>
+      </option>
+    </Configuration>
+    <Configuration>
+      <option name="CVS_ROOT" value=":local:/usr/local/homecvs/" />
+      <option name="PATH_TO_WORKING_FOLDER" value="" />
+      <option name="PROXY_SETTINGS">
+        <value>
+          <option name="USE_PROXY" value="false" />
+          <option name="PROXY_HOST" value="" />
+          <option name="PROXY_PORT" value="8080" />
+          <option name="TYPE" value="0" />
+          <option name="LOGIN" value="" />
+          <option name="PASSWORD" value="" />
+        </value>
+      </option>
+      <option name="EXT_CONFIGURATION">
+        <value>
+          <option name="CVS_RSH" value="ssh" />
+          <option name="PRIVATE_KEY_FILE" value="" />
+          <option name="ADDITIONAL_PARAMETERS" value="" />
+          <option name="USE_INTERNAL_SSH_IMPLEMENTATION" value="false" />
+        </value>
+      </option>
+      <option name="SSH_CONFIGURATION">
+        <value SSH_TYPE="SSH1, SSH2">
+          <option name="USE_PPK" value="false" />
+          <option name="PATH_TO_PPK" value="" />
+        </value>
+      </option>
+      <option name="SSH_FOR_EXT_CONFIGURATION">
+        <value SSH_TYPE="SSH1, SSH2">
+          <option name="USE_PPK" value="false" />
+          <option name="PATH_TO_PPK" value="" />
+        </value>
+      </option>
+      <option name="LOCAL_CONFIGURATION">
+        <value>
+          <option name="PATH_TO_CVS_CLIENT" value="/opt/local/bin/cvs" />
+        </value>
+      </option>
+      <option name="DATE_OR_REVISION_SETTINGS">
+        <value>
+          <option name="BRANCH" value="" />
+          <option name="DATE" value="" />
+          <option name="USE_BRANCH" value="false" />
+          <option name="USE_DATE" value="false" />
+        </value>
+      </option>
+    </Configuration>
+  </component>
+  <component name="DBNavigator.Application.Settings">
+    <enable-debug-mode value="false" />
+    <enable-developer-mode value="false" />
+    <show-plugin-conflict-dialog value="false" />
+  </component>
+  <component name="ImportConfiguration">
+    <option name="VENDOR" value="likemc" />
+    <option name="RELEASE_TAG" value="init" />
+    <option name="LOG_MESSAGE" value="" />
+  </component>
+  <component name="NodeJsLocalInterpreters">
+    <local-interpreter path="/usr/local/Cellar/node/8.9.0/bin/node">
+      <version-cache version="8.9.0" last-modified="1509994900000" />
+    </local-interpreter>
+    <local-interpreter path="/usr/local/bin/node">
+      <version-cache version="8.9.0" last-modified="1509994900000" />
+      <npm-package value="/usr/local/lib/node_modules/npm" />
+    </local-interpreter>
+  </component>
+  <component name="PyTestFrameworkService">
+    <option name="SDK_TO_NOSETEST">
+      <map>
+        <entry key="/usr/local/bin/python3.6" value="true" />
+      </map>
+    </option>
+  </component>
+  <component name="RecentTaskRepositories">
+    <Trello shared="false">
+      <commitMessageFormat>{id} {summary}</commitMessageFormat>
+      <option name="currentBoard">
+        <TrelloBoard id="550a9e4df1fa3861ebcca441" name="ERP" />
+      </option>
+      <option name="currentList">
+        <TrelloList id="ILLEGAL_ID" name="-- from all lists --" />
+      </option>
+      <option name="currentUser">
+        <TrelloUser id="54f4b0a26dd0e74308dd83c1" name="christoph185" />
+      </option>
+      <password>dfcbdfcedf93dfc8df99df9fdfccdf99df9fdf9ddf9bdf9cdfcedfc9dfc8df99df92dfcedf99df9edf93df9fdfccdfccdf9bdfc9df93dfc9df9edf9fdf9adf9edf9fdfcbdf93df99df9ddfcfdf9cdf99dfccdfcfdfccdf9adf9bdf9cdf9cdf92dfcedf93df93df9fdfc8df9edf9fdfcfdfcfdf92df9cdf9bdfcedf9bdfc8df9f</password>
+      <option name="includeAllCards" value="true" />
+      <option name="loginAnonymously" value="false" />
+      <option name="preferredCloseTaskState" />
+      <option name="preferredOpenTaskState" />
+      <option name="shouldFormatCommitMessage" value="false" />
+      <option name="url" value="https://api.trello.com" />
+      <option name="useHttpAuthentication" value="false" />
+      <option name="useProxy" value="false" />
+      <username />
+    </Trello>
+  </component>
+</application>
