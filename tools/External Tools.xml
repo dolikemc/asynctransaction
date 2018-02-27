@@ -1,9 +1,0 @@
-<toolSet name="External Tools">
-  <tool name="restifserver" description="restif http for likemc database" showInMainMenu="true" showInEditor="true" showInProject="true" showInSearchPopup="true" disabled="false" useConsole="true" showConsoleOnStdOut="true" showConsoleOnStdErr="true" synchronizeAfterRun="true">
-    <exec>
-      <option name="COMMAND" value="./httpserver " />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$USER_HOME$/CLionProjects/RestDataBase/cmake-build-debug" />
-    </exec>
-  </tool>
-</toolSet>
