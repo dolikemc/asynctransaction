@@ -1,2 +1,2 @@
 # asynctransaction
-sync data bases for distributed micro services
+Framework to connect data bases of small applications (micro services) via a simple (REST-)API.
