@@ -1,0 +1,8 @@
+<application>
+  <component name="XDebuggerSettings">
+    <data-views>
+      <show-values-inline>false</show-values-inline>
+    </data-views>
+    <general />
+  </component>
+</application>
