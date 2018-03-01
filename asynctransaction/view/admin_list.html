@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+{% block content %}
+<div>
+    <table class="w3-table-all w3-hoverable">
+        <tr>
+
+            <th>ID</th>
+            <th>
+                IP ADDRESS
+            </th>
+            <th>
+                URL
+            </th>
+            <th>
+                METHOD
+            </th>
+            <th>
+                DESCRIPTION
+            </th>
+            <th>
+                CREATED
+            </th>
+            <th>
+                UPDATED
+            </th>
+            <th>
+                EDIT
+            </th>
+
+        </tr>
+        {% for row in data %}
+        <tr>
+
+            <td>
+                {{row.ID}}
+            </td>
+
+            <td>
+                {{row.IP_ADDRESS}}:{{row.PORT}}
+            </td>
+            <td>
+                {{row.URL}}
+            </td>
+            <td>
+                {{row.METHOD}}
+            </td>
+            <td>
+                {{row.DESCRIPTION}}
+            </td>
+            <td>
+                {{row.CREATED_ON}}
+            </td>
+            <td>
+                {{row.UPDATED_ON}}
+            </td>
+            <td>
+                <a class="w3-btn" href="/admin/partners/{{row.IP_ADDRESS}}:{{row.PORT}}">Edit</a>
+            </td>
+
+        </tr>
+
+        {% endfor %}
+    </table>
+</div>
+<br/>
+<form method="POST" action='' class="w3-container">
+    <input type="hidden" name="_method" value="PUT" class="w3-input">
+    <div class="w3-row-padding">
+        <div class="w3-third">
+            <input class="w3-input w3-border w3-light-grey" type="number" name="ID" value={{data[0].ID}} readonly>
+        </div>
+        <div class="w3-third">
+            <input class="w3-input w3-border" type="text" name="IP_ADDRESS" value="{{data[0].IP_ADDRESS}}" size="15">
+            <label>Address:</label>
+        </div>
+        <div class="w3-third">
+            <input class="w3-input w3-border" type="number" name="PORT" value={{data[0].PORT}} size="5">
+        </div>
+    </div>
+    <div class="w3-row-padding">
+        <label>Description</label> <input class="w3-input" type="text" name="DESCRIPTION"
+                                          value="{{data[0].DESCRIPTION}}">
+        <p>CreatedOn: {{data[0].CREATED_ON}}</p>
+        <p>UpdatedOn: {{data[0].UPDATED_ON}}</p>
+        <input type="submit" value="Submit">
+        <input type="reset">
+        <button onclick="document.getElementById('theId').value = 0">Add New</button>
+    </div>
+</form>
+{% endblock %}
