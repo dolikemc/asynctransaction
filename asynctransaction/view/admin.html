@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+<form method="POST" action=''>
+    <input type="hidden" name="_method" value="PUT"/>
+    <p><input type="number" name="ID" value={{ID}} size="5" id="theId" readonly></p>
+    <p>Address: <input type="text" name="IP_ADDRESS" value="{{IP_ADDRESS}}" size="15">:
+        <input type="number" name="PORT" value={{PORT}} size="5"></p>
+    <p>Description: <input type="text" name="DESCRIPTION" value="{{DESCRIPTION}}"></p>
+    <p>CreatedOn: {{CREATED_ON}}</p>
+    <p>UpdatedOn: {{UPDATED_ON}}</p>
+    <input type="submit" value="Submit">
+    <input type="reset">
+    <button onclick="document.getElementById('theId').value = 0">Add New</button>
+</form>
+{% endblock %}
