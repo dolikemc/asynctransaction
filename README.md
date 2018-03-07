@@ -4,8 +4,7 @@ a simple (REST-)API. Use aiohttp.
 
 **Setup**
 
-Create a config file and a SQLite data base in the root folder where the server 
-should be started.
+Create a config file in the root folder of the application.
 
 `# content of likemc.ini`
 
@@ -18,7 +17,11 @@ should be started.
 `task: 3010`
 
 
-To be continued...
+Create a SQLite data base where your config task_db entry points to.
+
+`~/sqlite3 -batch transaction.db < data/model/transaction.sql`
+
+To be continued ...
 
 
 
