@@ -7,7 +7,7 @@ a simple (REST-)API. Use aiohttp.
 Create a config file in the root folder of the application.
 
 `# content of likemc.ini`
-
+    
 `[DATABASE]`
 
 `task_db: /<--root_folder_of_the_application-->/transaction.db`

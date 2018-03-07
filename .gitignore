@@ -105,3 +105,17 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+/cover/
+/ignore.xml
+/github_settings.xml
+/likemc.ini
+/.gitignore
+/.idea/
+cover
+.idea
+server.pem
+transaction.db
+test.db
+likemc.ini
+*.db
+.gitignore
