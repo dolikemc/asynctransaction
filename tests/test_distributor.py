@@ -19,21 +19,21 @@ class TestClient(ClientSession):
 class MyAppTestCase(AioHTTPTestCase):
 
     async def get_application(self):
-        app = Application()
-        app.middlewares.append(logger_middleware)
-        app['DISTRIBUTOR_CLIENT'] = TestClient(HTTPOk())
-        app['DISTRIBUTOR_DB'] = prepare_connection()
-        cursor: sqlite3.Cursor = app['DISTRIBUTOR_DB']
+        test_app = Application()
+        test_app.middlewares.append(logger_middleware)
+        test_app['DISTRIBUTOR_CLIENT'] = TestClient(HTTPOk())
+        test_app['DISTRIBUTOR_DB'] = prepare_connection()
+        cursor: sqlite3.Cursor = test_app['DISTRIBUTOR_DB']
         with open('asynctransaction/data/model/transaction.sql') as prepare_db:
             prepare_sql = prepare_db.read()
             cursor.executescript(str(prepare_sql))
         with open('asynctransaction/data/model/test_data.sql') as prepare_db:
             prepare_sql = prepare_db.read()
             cursor.executescript(str(prepare_sql))
-        apply_routes(app)
-        app.on_startup.append(start_background_tasks)
-        app.on_cleanup.append(cleanup_background_tasks)
-        return app
+        apply_routes(test_app)
+        test_app.on_startup.append(start_background_tasks)
+        test_app.on_cleanup.append(cleanup_background_tasks)
+        return test_app
 
     # the unittest_run_loop decorator can be used in tandem with
     # the AioHTTPTestCase to simplify running
@@ -129,6 +129,12 @@ class MyAppTestCase(AioHTTPTestCase):
         request = await self.client.request("GET", "/admin/partners/127.1.1.1:3030")
         self.assertEqual(request.status, 400)
 
-    def test_config(self):
-        port = apply_config(self.app)
-        self.assertEqual(port, 3010)
+    def test_https_config(self):
+        config_port = apply_config(self.app, 'likemc.ini')
+        self.assertEqual(config_port, 3010)
+        certificate: ssl.SSLContext = apply_ssl('likemc.ini')
+        self.assertFalse(certificate is None)
+
+    def test_http_config(self):
+        certificate = apply_ssl('test.ini')
+        self.assertTrue(certificate is None)
