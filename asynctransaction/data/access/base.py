@@ -105,6 +105,7 @@ class DataAccessBase(object):
     def _entity_factory(self, row: Dict) -> EntityBase:
         if self.name not in DataAccessBase._allowed_entities():
             raise NoValidEntity
+        # just make from CLASS_NAME a ClassName(**row) call
         return eval(''.join([x.capitalize() for x in self.name[:-1].split('_')]))(**row)
 
     @classmethod
