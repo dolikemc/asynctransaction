@@ -40,9 +40,12 @@ class MyAppTestCase(AioHTTPTestCase):
     # tests that are asynchronous
     @unittest_run_loop
     async def test_order_post(self):
+        """
+        "POST", "/transactions/orders", data='{"PARTNER_ID": 1,  "DATA": {"ID": 239, "ORDER": 12}}'
+        Expect: 201
+        """
         request = await self.client.request(
-            "POST", "/transactions/orders",
-            data='{"PARTNER_ID": 1,  "DATA": {"ID": 239, "ORDER": 12}}')
+            "POST", "/transactions/orders", data='{"PARTNER_ID": 1,  "DATA": {"ID": 239, "ORDER": 12}}')
         self.assertEqual(request.status, 201)
         text = await request.text()
         self.assertEqual(text, '/orders/239/2')
@@ -50,8 +53,7 @@ class MyAppTestCase(AioHTTPTestCase):
     @unittest_run_loop
     async def test_bad_post(self):
         request = await self.client.request(
-            "POST", "/transactions/not_exists",
-            data='{"PARTNER_ID": 1,  "DATA": {"ID": 239, "ORDER": 12}}')
+            "POST", "/transactions/not_exists", data='{"PARTNER_ID": 1,  "DATA": {"ID": 239, "ORDER": 12}}')
         self.assertEqual(request.status, 501)
 
     @unittest_run_loop
@@ -101,6 +103,9 @@ class MyAppTestCase(AioHTTPTestCase):
     async def test_subscriber(self):
         request = await self.client.request("GET", "/admin/subscribers")
         self.assertEqual(request.status, 200)
+        data = await request.text()
+        self.assertIsInstance(data, str)
+        self.assertTrue(data.find('IP_ADDRESS'))
 
     @unittest_run_loop
     async def test_add_partner(self):
@@ -138,3 +143,55 @@ class MyAppTestCase(AioHTTPTestCase):
     def test_http_config(self):
         certificate = apply_ssl('test.ini')
         self.assertTrue(certificate is None)
+
+    @unittest_run_loop
+    async def test_delete_subscriber(self):
+        """
+        Delete a subscriber
+        "PUT", "/admin/subscribers", data={'ID': '1', 'DELETED': '1'}
+        "DELETE", "/admin/subscribers/1"
+        """
+        request = await self.client.request("PUT", "/admin/subscribers", data={'ID': '1', 'DELETED': '1'})
+        self.assertEqual(request.status, 200)
+        subscriber = Subscriber(self.app['DISTRIBUTOR_DB'])
+        await subscriber.read(entity_id=1)
+        self.assertEqual(len([a for a in filter(lambda x: x.id == 1 and x.deleted == 1, subscriber.data)]), 1)
+
+    @unittest_run_loop
+    async def test_change_subscriber(self):
+        """
+        Change an existing subscriber, in this case change the partner from 2 to 1
+        "PUT", "/admin/subscribers", data={'ID': '3', 'PARTNER_ID': '1'}
+        """
+        request = await self.client.request("PUT", "/admin/subscribers", data={'ID': '3', 'PARTNER_ID': '1'})
+        self.assertEqual(request.status, 200)
+        subscriber = Subscriber(self.app['DISTRIBUTOR_DB'])
+        await subscriber.read(entity_id=3)
+        self.assertEqual(len([a for a in filter(lambda x: x.id == 3 and x.partner_id == 1, subscriber.data)]), 1)
+
+    @unittest_run_loop
+    async def test_list_group(self):
+        """
+        List all existing groups, means all existing combinations of events
+        "GET", "/admin/subscribers?group=1"
+        """
+        request = await self.client.request(
+            "GET", "/admin/subscribers?group=1")
+        self.assertEqual(request.status, 200)
+        data = await request.text()
+        self.assertIsInstance(data, Dict)
+
+    @unittest_run_loop
+    async def test_add_partner_with_group(self):
+        """
+        Add a partner and assign it to the group dependent subscriptions
+        "POST", "/admin/partner?group=1", data={'ID': '0', 'IP_ADDRESS': '127.0.0.1', 'PORT': '203',
+            'DESCRIPTION': 'Local Server'}
+        """
+        request = await self.client.request(
+            "POST", "/admin/partner?group=1",
+            data={'ID': '0', 'IP_ADDRESS': '127.0.0.1', 'PORT': '203', 'DESCRIPTION': 'Local Server'})
+        self.assertEqual(request.status, 201)
+        subscriber = Subscriber(self.app['DISTRIBUTOR_DB'])
+        await subscriber.read()
+        self.assertEqual(len([a for a in filter(lambda x: x.port == 203, subscriber.data)]), 2)
