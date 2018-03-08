@@ -14,6 +14,7 @@ from asynctransaction.data.access.factory import *
 from asynctransaction.data.access.base import prepare_connection
 
 __version__ = '0.5.0'
+CONFIG_FILE_NAME: str = 'likemc.ini'
 
 log = logging.getLogger('asynctransaction.server.distributor')
 logging.basicConfig(level=logging.DEBUG)
@@ -125,7 +126,7 @@ async def logger_middleware(request: web.Request, handler) -> web.Response:
     return response
 
 
-def apply_config(task_app: web.Application, config_file_name: str = 'likemc.ini') -> int:
+def apply_config(task_app: web.Application, config_file_name: str) -> int:
     config = ConfigParser()
     config.read(config_file_name)
     task_port: int = config.getint('SERVER', 'task')
@@ -133,6 +134,18 @@ def apply_config(task_app: web.Application, config_file_name: str = 'likemc.ini'
         database_name=str(config.get('DATABASE', 'task_db')))
     task_app['DISTRIBUTOR_DB'] = engine
     return task_port
+
+
+def apply_ssl(config_file_name: str) -> (ssl.SSLContext, None):
+    config = ConfigParser()
+    config.read(config_file_name)
+    schema: str = config.get('SERVER', 'schema')
+    if schema != 'https':
+        return None
+    certificate: str = config.get('SERVER', 'certificate')
+    ssl_ctx: ssl.SSLContext = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+    ssl_ctx.load_cert_chain(certfile=certificate, keyfile=certificate)
+    return ssl_ctx
 
 
 def apply_routes(task_app: web.Application) -> bool:
@@ -150,11 +163,8 @@ if __name__ == '__main__':
     app.on_startup.append(start_background_tasks)
     app.on_cleanup.append(cleanup_background_tasks)
     apply_routes(app)
-    port = apply_config(app)
-    ssl_ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-    ssl_ctx.load_cert_chain(certfile='./server.pem', keyfile='./server.pem')
-    web.run_app(app=app, port=port, ssl_context=ssl_ctx)
-    # web.run_app(app=app, port=port)
+    port = apply_config(app, CONFIG_FILE_NAME)
+    web.run_app(app=app, port=port, ssl_context=apply_ssl(CONFIG_FILE_NAME))
 
 # openssl req -new -x509 -keyout server.pem -out server.pem -days 365 -nodes
 # curl -v --insecure https://localhost:3010/admin/partners/127.0.0.1:3030
