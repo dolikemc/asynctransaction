@@ -119,3 +119,13 @@ test.db
 likemc.ini
 *.db
 .gitignore
+.DS_Store
+asynctransaction/.DS_Store
+asynctransaction/data/.DS_Store
+asynctransaction/data/model/.DS_Store
+asynctransaction/server/.DS_Store
+asynctransaction/static/.DS_Store
+asynctransaction/view/.DS_Store
+cmake-build-debug/
+/server.pem
+/transaction.db
