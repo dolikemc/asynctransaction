@@ -1,3 +1,24 @@
+""":module: Distribution
+
+Secure Connection
+=================
+
+*Create a certificate*
+
+    openssl req -new -x509 -keyout server.pem -out server.pem -days 365 -nodes
+
+*Get via https*
+
+    curl -v --insecure https://localhost:3010/admin/partners/127.0.0.1:3030
+    curl -v --cacert server.pem https://localhost:3010/admin/partners/127.0.0.1:3030
+
+*Put via https*
+
+    curl -v --cacert server.pem --data '{"PARTNER_ID": 1,  "DATA": {"ID": 239, "ORDER": 12}}' \
+-X PUT https://localhost:3010/transactions/orders
+
+"""
+
 import sqlite3
 from configparser import ConfigParser
 from datetime import datetime
@@ -21,6 +42,15 @@ logging.basicConfig(level=logging.DEBUG)
 
 
 class SubscriberAdmin(web.View):
+    """Subscriber Admin Screen API.
+
+    * Method      URL                         DATA                                RESULT
+    * "PUT"       "/admin/subscribers"        data={'ID': '1', 'DELETED': '1'}    200
+    * "PUT"       "/admin/subscribers"        data={'ID': 1, 'DELETED': 1}        200
+    * "DELETE"    "/admin/subscribers/1"      data={}                             200
+
+    """
+
     @aiohttp_jinja2.template('admin_list.html')
     async def get(self) -> Dict:
         subscriber_access = create_subscriber_access(con=self.request.app['DISTRIBUTOR_DB'])
@@ -80,6 +110,10 @@ class Distributor(web.View):
         return web.Response(text=transaction.message, status=201)
 
     async def put(self) -> web.Response:
+        """
+        Just call post()
+        :return: response from post, see there
+        """
         return await self.post()
 
 
@@ -165,9 +199,3 @@ if __name__ == '__main__':
     apply_routes(app)
     port = apply_config(app, CONFIG_FILE_NAME)
     web.run_app(app=app, port=port, ssl_context=apply_ssl(CONFIG_FILE_NAME))
-
-# openssl req -new -x509 -keyout server.pem -out server.pem -days 365 -nodes
-# curl -v --insecure https://localhost:3010/admin/partners/127.0.0.1:3030
-# curl -v --cacert server.pem https://localhost:3010/admin/partners/127.0.0.1:3030
-# curl -v --cacert server.pem --data '{"PARTNER_ID": 1,  "DATA": {"ID": 239, "ORDER": 12}}'
-#  -X PUT https://localhost:3010/transactions/orders

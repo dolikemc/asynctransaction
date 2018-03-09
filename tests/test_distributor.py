@@ -195,3 +195,5 @@ class MyAppTestCase(AioHTTPTestCase):
         subscriber = Subscriber(self.app['DISTRIBUTOR_DB'])
         await subscriber.read()
         self.assertEqual(len([a for a in filter(lambda x: x.port == 203, subscriber.data)]), 2)
+
+    # todo: event handling, add, change, assign to group
