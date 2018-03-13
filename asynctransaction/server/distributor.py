@@ -44,11 +44,14 @@ logging.basicConfig(level=logging.DEBUG)
 class SubscriberAdmin(web.View):
     """Subscriber Admin Screen API.
 
-    * Method      URL                         DATA                                RESULT
-    * "PUT"       "/admin/subscribers"        data={'ID': '1', 'DELETED': '1'}    200
-    * "PUT"       "/admin/subscribers"        data={'ID': 1, 'DELETED': 1}        200
-    * "DELETE"    "/admin/subscribers/1"      data={}                             200
-
+    * Method    URL                         DATA                                CODE    RESULT DATA
+    * PUT       /admin/subscribers          data={'ID': '1', 'DELETED': '1'}    200     {'ID': 1, 'DELETED': 1}
+    * PUT       /admin/subscribers          data={'ID': 1, 'DELETED': 1}        200     {'ID': 1, 'DELETED': 1}
+    * DELETE    /admin/subscribers/1        data=None                           200     {'ID': 1, 'DELETED': 1}
+    * PUT       /admin/subscribers          data={'ID': 3, 'PARTNER_ID': 1}     200     {'ID': 3, 'PARTNER_ID': 1}
+    * GET       /admin/subscribers?group=1  data=None                           200
+    * POST      /admin/partner?group=1      data={'ID': '0', 'IP_ADDRESS': '127.0.0.1', 'PORT': '203', 'DESCRIPTION': 'Local Server'}
+                                                                                201     {'PORT': 203}
     """
 
     @aiohttp_jinja2.template('admin_list.html')

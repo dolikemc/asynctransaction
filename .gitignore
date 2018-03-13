@@ -129,3 +129,6 @@ asynctransaction/view/.DS_Store
 cmake-build-debug/
 /server.pem
 /transaction.db
+/distributor.html
+distributor.html
+/_build/

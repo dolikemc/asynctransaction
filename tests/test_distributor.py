@@ -197,3 +197,7 @@ class MyAppTestCase(AioHTTPTestCase):
         self.assertEqual(len([a for a in filter(lambda x: x.port == 203, subscriber.data)]), 2)
 
     # todo: event handling, add, change, assign to group
+
+    def test_docstring(self):
+        sub = SubscriberAdmin(None)
+        print(sub.__doc__)
