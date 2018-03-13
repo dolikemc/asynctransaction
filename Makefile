@@ -5,7 +5,7 @@
 SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
 SPHINXPROJ    = asynctransaction
-SOURCEDIR     = .
+SOURCEDIR     = doc
 BUILDDIR      = _build
 
 # Put it first so that "make" without argument is like "make help".

@@ -20,6 +20,7 @@ sys.path.insert(1, os.path.abspath('../'))
 
 # -- Project information -----------------------------------------------------
 
+
 project = u'asynctransaction'
 copyright = u'2018, dolikemc@gmail.com'
 author = u'dolikemc@gmail.com'
