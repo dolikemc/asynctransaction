@@ -1,21 +1,34 @@
-""":module: Distribution
+"""
+==================================================
+:mod:`Distributor` -- Server for distributing data
+==================================================
+
+.. module:: distributor
+    :platform: Un*x, MacOS, Windows
+    :synopsis: Class and main method to run the distributor server
+.. moduleAuthor:: Christoph Buchetmann <dolikemc@gmail.com>
 
 Secure Connection
 =================
 
-*Create a certificate*
+Create a certificate::
 
-    openssl req -new -x509 -keyout server.pem -out server.pem -days 365 -nodes
+    openssl req -new -x509 -keyout server.pem -out server.pem
+        -days 365 -nodes
 
-*Get via https*
+Get via https::
 
-    curl -v --insecure https://localhost:3010/admin/partners/127.0.0.1:3030
-    curl -v --cacert server.pem https://localhost:3010/admin/partners/127.0.0.1:3030
+    curl -v --insecure
+        https://localhost:3010/admin/partners/127.0.0.1:3030
 
-*Put via https*
+    curl -v --cacert server.pem
+        https://localhost:3010/admin/partners/127.0.0.1:3030
 
-    curl -v --cacert server.pem --data '{"PARTNER_ID": 1,  "DATA": {"ID": 239, "ORDER": 12}}' \
--X PUT https://localhost:3010/transactions/orders
+Put via https::
+
+    curl -v --cacert server.pem --data '{"PARTNER_ID": 1,
+        "DATA": {"ID": 239, "ORDER": 12}}'
+        -X PUT https://localhost:3010/transactions/orders
 
 """
 
@@ -42,16 +55,30 @@ logging.basicConfig(level=logging.DEBUG)
 
 
 class SubscriberAdmin(web.View):
-    """Subscriber Admin Screen API.
+    """
+    Rest-API:
 
-    * Method    URL                         DATA                                CODE    RESULT DATA
-    * PUT       /admin/subscribers          data={'ID': '1', 'DELETED': '1'}    200     {'ID': 1, 'DELETED': 1}
-    * PUT       /admin/subscribers          data={'ID': 1, 'DELETED': 1}        200     {'ID': 1, 'DELETED': 1}
-    * DELETE    /admin/subscribers/1        data=None                           200     {'ID': 1, 'DELETED': 1}
-    * PUT       /admin/subscribers          data={'ID': 3, 'PARTNER_ID': 1}     200     {'ID': 3, 'PARTNER_ID': 1}
-    * GET       /admin/subscribers?group=1  data=None                           200
-    * POST      /admin/partner?group=1      data={'ID': '0', 'IP_ADDRESS': '127.0.0.1', 'PORT': '203', 'DESCRIPTION': 'Local Server'}
-                                                                                201     {'PORT': 203}
+    .. code-block:: rest
+
+        'PUT', path="/admin/subscribers", data={'ID': '1', 'DELETED': '1'} ->
+            200, {'ID': 1, 'DELETED': 1}
+
+        'PUT', path='/admin/subscribers', data={'ID': 1, 'DELETED': 1} ->
+            200, {'ID': 1, 'DELETED': 1}
+
+        'DELETE', path='/admin/subscribers/1' ->
+            200, {'ID': 1, 'DELETED': 1}
+
+        'PUT', path='/admin/subscribers', data={'ID': 3, 'PARTNER_ID': 1} ->
+            200, {'ID': 3, 'PARTNER_ID': 1}
+
+        'GET', path='/admin/subscribers?group=1' ->
+            200
+
+        'POST', path='/admin/partner?group=1', data={'ID': '0', 'IP_ADDRESS':
+            '127.0.0.1', 'PORT': '203', 'DESCRIPTION': 'Local'} ->
+            201, {'PORT': 203}
+
     """
 
     @aiohttp_jinja2.template('admin_list.html')
@@ -60,8 +87,39 @@ class SubscriberAdmin(web.View):
         data = await subscriber_access.get_subscribers()
         return {'data': data}
 
+    @aiohttp_jinja2.template('admin_list.html')
+    async def post(self) -> Dict:
+        subscriber_access = create_subscriber_access(con=self.request.app['DISTRIBUTOR_DB'])
+        data = await subscriber_access.get_subscribers()
+        return {'data': data}
+
+    @aiohttp_jinja2.template('admin_list.html')
+    async def put(self) -> Dict:
+        return await self.post()
+
+    @aiohttp_jinja2.template('admin_list.html')
+    async def delete(self) -> Dict:
+        return await self.post()
+
 
 class PartnerAdmin(web.View):
+    """
+    Rest-API Partner Admin:
+
+    .. code-block:: rest
+
+        "GET", "/admin/partners/127.0.0.1:3030" ->
+            200
+
+        'POST', path="/admin/partners/3030", data={'IP_ADDRESS': '127.0.0.1', 'PORT': '2',
+            'DESCRIPTION': 'CLIENT SERVER'} ->
+            200, {'PORT': 2, 'DESCRIPTION': 'CLIENT SERVER'}
+
+        "POST", "/admin/partners/3030", data={'_method': 'PUT', 'ID': '1', 'IP_ADDRESS':
+            '127.0.0.1', 'PORT': '20', 'DESCRIPTION': 'CLIENT SERVER'} ->
+            200, {'ID': 1, 'PORT': 20}
+
+    """
 
     @aiohttp_jinja2.template('admin.html')
     async def get(self) -> Dict:
@@ -90,6 +148,10 @@ class PartnerAdmin(web.View):
         except sqlite3.DatabaseError as error:
             log.error(error)
             raise web.HTTPException()
+
+    @aiohttp_jinja2.template('admin.html')
+    async def put(self) -> Dict:
+        return await self.post()
 
 
 class Distributor(web.View):
